@@ -1,0 +1,19 @@
+<!-- Nikon F90 help — paste into WordPress Custom HTML block -->
+<div id="nikon-f90-help-wrap" style="max-width:100%;overflow:hidden;">
+  <iframe id="nikon-f90-help"
+    src="https://你的域名/wp-content/uploads/nikon-f90-guide/index.html?embed=1"
+    title="尼康 F90X/F90 操作指南"
+    style="width:100%;border:0;display:block;min-height:720px;background:#fff;"
+    loading="lazy"></iframe>
+</div>
+<script>
+(function () {
+  var iframe = document.getElementById('nikon-f90-help');
+  window.addEventListener('message', function (e) {
+    if (!e.data || e.data.type !== 'nikon-help-height') return;
+    if (e.source !== iframe.contentWindow) return;
+    var h = Math.max(480, Math.min(e.data.height || 720, 4000));
+    iframe.style.height = h + 'px';
+  });
+})();
+</script>

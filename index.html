@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>尼康 F90X/F90 操作指南</title>
+  <style>
+:root {
+  --nikon-yellow: #FFE100;
+  --nikon-yellow-soft: #fff9cc;
+  --nikon-yellow-hover: #ffd900;
+  --nikon-black: #141414;
+  --nikon-text: #2a2a2a;
+  --nikon-muted: #666;
+  --nikon-border: #e0e0e0;
+  --nikon-surface: #f7f7f7;
+  --nikon-nav-bg: #141414;
+  --nikon-nav-text: #e8e8e8;
+  --nikon-nav-muted: #999;
+  font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Segoe UI", sans-serif;
+  font-size: 12pt;
+}
+body { margin: 0; display: flex; height: 100vh; background: var(--nikon-surface); color: var(--nikon-black); }
+body > nav {
+  width: 300px; background: var(--nikon-nav-bg); border-right: none;
+  overflow: auto; padding: 14px 12px; font-size: 11.5pt;
+  box-shadow: 2px 0 12px rgba(0,0,0,.12);
+}
+main { flex: 1; overflow: auto; background: #fff; padding: 28px 36px 40px; }
+.brand-header {
+  margin: -14px -12px 14px; padding: 14px 12px 12px; background: #fff;
+  border-bottom: 3px solid var(--nikon-yellow);
+}
+.brand-logos {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 10px; min-height: 28px;
+}
+.brand-nikon-link { display: flex; align-items: center; flex-shrink: 0; line-height: 0; }
+.brand-nikon { height: 22px; width: auto; display: block; }
+.brand-f90x {
+  height: 28px; width: auto; max-width: 150px; object-fit: contain;
+  object-position: right center; margin-left: auto; flex-shrink: 1;
+}
+h1.bundle {
+  font-size: 10.5pt; font-weight: 700; margin: 0;
+  color: var(--nikon-black); letter-spacing: 0.02em; line-height: 1.35;
+}
+body > nav select,
+body > nav input[type="search"] {
+  width: 100%; margin-bottom: 10px; box-sizing: border-box; font-family: inherit; font-size: 11pt;
+  background: #2a2a2a; color: #f0f0f0; border: 1px solid #444; border-radius: 2px; padding: 8px 10px;
+}
+body > nav input[type="search"]::placeholder { color: var(--nikon-nav-muted); }
+body > nav select:focus,
+body > nav input[type="search"]:focus {
+  outline: 2px solid var(--nikon-yellow); outline-offset: 1px; border-color: var(--nikon-yellow);
+}
+#title {
+  font-size: 1.45rem; font-weight: 700; margin: 0 0 1.25rem; line-height: 1.35;
+  color: var(--nikon-black); padding-bottom: 0.65rem;
+  border-bottom: 3px solid var(--nikon-yellow);
+}
+#body { font-size: 11.5pt; color: var(--nikon-text); }
+.topic-list { list-style: none; padding: 0; margin: 0; }
+.toc-node { list-style: none; margin: 0; padding: 0; }
+.toc-children { list-style: none; padding: 0; margin: 0; }
+.toc-row {
+  display: flex; align-items: center; gap: 4px; padding: 5px 6px; cursor: default;
+  font-size: 11pt; line-height: 1.4; border-radius: 2px; scroll-margin: 4px 0;
+  color: var(--nikon-nav-text); transition: background 0.12s ease, color 0.12s ease;
+}
+.toc-row:hover {
+  background: #252525; color: #fff;
+  box-shadow: inset 3px 0 0 var(--nikon-yellow);
+}
+.toc-node.active > .toc-row {
+  background: var(--nikon-yellow); color: var(--nikon-black); font-weight: 600;
+  box-shadow: none;
+}
+.toc-toggle { width: 16px; flex-shrink: 0; text-align: center; cursor: pointer; font-size: 10pt; user-select: none; color: var(--nikon-nav-muted); }
+.toc-node.active > .toc-row .toc-toggle { color: var(--nikon-black); }
+.toc-spacer { width: 16px; flex-shrink: 0; }
+.toc-label { flex: 1; cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 4px; }
+.toc-label img.wh-inline { flex-shrink: 0; max-height: 1.1em; max-width: 2.5em; width: auto; height: auto;
+  object-fit: contain; vertical-align: middle; border: none; image-rendering: crisp-edges; }
+#title img.wh-inline { max-height: 1.2em; max-width: 2.8em; vertical-align: middle; margin-right: 4px;
+  border: none; object-fit: contain; image-rendering: crisp-edges; }
+.toc-label.toc-branch { font-weight: 600; }
+#breadcrumb { font-size: 10pt; color: var(--nikon-muted); margin: 0 0 14px; line-height: 1.5; }
+.crumb-link { color: var(--nikon-black); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+.crumb-link:hover { border-bottom-color: var(--nikon-yellow); }
+.crumb-sep { color: #bbb; margin: 0 4px; }
+.crumb-current { color: var(--nikon-black); font-weight: 600; }
+#topic-nav {
+  display: flex; gap: 14px; justify-content: space-between; margin-top: 2rem;
+  padding-top: 1.25rem; border-top: 1px solid var(--nikon-border);
+}
+.topic-nav-btn {
+  flex: 1; max-width: 48%; display: flex; flex-direction: column; gap: 5px;
+  padding: 12px 14px; border: 1px solid var(--nikon-border); border-radius: 2px;
+  background: #fff; color: var(--nikon-black); text-decoration: none; font-size: 10.5pt;
+  box-sizing: border-box; transition: border-color 0.15s, background 0.15s;
+}
+.topic-nav-btn:hover { background: var(--nikon-yellow-soft); border-color: var(--nikon-yellow); }
+.topic-nav-next { text-align: right; align-items: flex-end; margin-left: auto; }
+.topic-nav-prev { text-align: left; align-items: flex-start; }
+.topic-nav-spacer { flex: 1; max-width: 48%; visibility: hidden; }
+.topic-nav-dir { font-weight: 700; color: var(--nikon-muted); font-size: 9.5pt; text-transform: uppercase; letter-spacing: 0.04em; }
+.topic-nav-label { color: var(--nikon-black); line-height: 1.4; word-break: break-word; font-weight: 500; }
+@media (max-width: 600px) {
+  main { padding: 20px 16px 32px; }
+  #title { font-size: 1.25rem; }
+  #topic-nav { flex-direction: column; gap: 10px; }
+  .topic-nav-btn, .topic-nav-spacer { max-width: 100%; }
+  .topic-nav-next { text-align: left; align-items: flex-start; margin-left: 0; }
+}
+
+.winhelp-topic { line-height: 1.65; max-width: 720px; font-size: 11.5pt; color: var(--nikon-text, #2a2a2a); }
+.wh-topic-lead { font-size: inherit; font-weight: normal; margin: 0 0 0.75em; color: var(--nikon-muted, #555); }
+.wh-block { margin: 0 0 1em; }
+.wh-block.wh-left { text-align: left; }
+.wh-block.wh-center { text-align: center; }
+.wh-block.wh-right { text-align: right; }
+.wh-p { margin: 0 0 0.65em; padding: 0; text-align: inherit; min-height: 1.4em; }
+.wh-p.wh-menu-row { display: flex; align-items: center; gap: 8px; min-height: 1.75em; margin: 6px 0; }
+.wh-p.wh-menu-row .wh-link {
+  display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+  font-size: inherit; font-weight: 500; text-decoration: none;
+  color: var(--nikon-black, #141414); padding: 6px 10px; border-radius: 2px;
+  transition: background 0.15s ease;
+}
+.wh-p.wh-menu-row .wh-link:hover { background: var(--nikon-yellow-soft, #fff9cc); }
+.wh-p.wh-menu-row img.wh-inline {
+  flex-shrink: 0; max-height: 1.2em; max-width: 2.8em; width: auto; height: auto;
+  object-fit: contain; vertical-align: middle;
+}
+.winhelp-topic.wh-home-guide .wh-p.wh-menu-row {
+  min-height: auto; margin: 12px 0 16px; gap: 10px;
+}
+.winhelp-topic.wh-home-guide .wh-p.wh-menu-row .wh-link {
+  padding: 10px 14px; font-size: 12pt;
+}
+.winhelp-topic.wh-home-guide .wh-p.wh-menu-row img.wh-inline {
+  max-height: 4.2em; max-width: 5.5em;
+}
+.wh-bold { font-weight: 700; color: var(--nikon-black, #141414); }
+.wh-italic { font-style: italic; }
+.wh-underline { text-decoration: underline; text-decoration-color: var(--nikon-yellow, #FFE100); text-underline-offset: 2px; }
+.wh-fig { display: block; margin: 1em 0; text-align: inherit; clear: both; }
+.wh-fig-left { text-align: left; }
+.wh-fig-center { text-align: center; }
+.wh-fig-right { text-align: right; }
+.wh-fig img { border: none; image-rendering: pixelated; display: inline-block; max-width: 100%; height: auto; }
+img.wh-inline { vertical-align: middle; margin: 0 3px; border: none; height: auto; width: auto;
+  image-rendering: crisp-edges; display: inline; max-height: 1.2em; max-width: 2.8em;
+  object-fit: contain; }
+.wh-link {
+  color: var(--nikon-black, #141414); text-decoration: underline;
+  text-decoration-color: var(--nikon-yellow, #FFE100); text-underline-offset: 3px;
+  cursor: pointer; transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+.wh-link:hover { color: #000; text-decoration-color: var(--nikon-black, #141414); }
+[class*="wh-fsize-"] { display: inline; }
+.wh-fsize-8 { font-size: 8pt; } .wh-fsize-9 { font-size: 9pt; } .wh-fsize-10 { font-size: 10pt; }
+.wh-fsize-11 { font-size: 11pt; } .wh-fsize-12 { font-size: 12pt; } .wh-fsize-14 { font-size: 14pt; }
+.wh-fsize-16 { font-size: 16pt; } .wh-fsize-18 { font-size: 18pt; } .wh-fsize-20 { font-size: 20pt; }
+.wh-fsize-24 { font-size: 24pt; } .wh-fsize-28 { font-size: 28pt; }
+.wh-p.wh-topic-heading { font-weight: 700; font-size: 1.05em; margin: 1.25em 0 0.5em; color: var(--nikon-black, #141414); }
+.wh-p.wh-program-row, .wh-p.wh-metering-row, .wh-p.wh-spec-row {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0.65em 0 0.35em;
+}
+.wh-program-letter, .wh-metering-label, .wh-spec-label { font-weight: 700; color: var(--nikon-black, #141414); }
+.wh-program-sep, .wh-spec-sep { flex-shrink: 0; color: var(--nikon-muted, #888); }
+.wh-p.wh-footnote { margin-top: 1em; font-size: 10pt; line-height: 1.55; color: var(--nikon-muted, #555); }
+.wh-p.wh-footnote.wh-footnote-bullet { margin-top: 0.35em; padding-left: 1.2em; text-indent: -1.2em; }
+.wh-p.wh-procedure-heading {
+  font-weight: 700; margin: 1.15em 0 0.45em; padding-left: 0.65em;
+  border-left: 3px solid var(--nikon-yellow, #FFE100); color: var(--nikon-black, #141414);
+}
+.wh-p.wh-procedure-indent {
+  margin: 0.35em 0 0.35em 2em; padding-left: 0.85em;
+  border-left: 2px solid var(--nikon-border, #e8e8e8); line-height: 1.6;
+}
+.wh-block.wh-appendix {
+  margin-top: 1.25em; padding: 12px 14px; max-width: 100%;
+  border: 1px solid var(--nikon-border, #e0e0e0); border-left: 4px solid var(--nikon-yellow, #FFE100);
+  background: var(--nikon-surface, #fafafa); border-radius: 2px;
+}
+
+#nav-toggle {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 200;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 11pt;
+  font-weight: 600;
+  border: 2px solid var(--nikon-yellow, #FFE100);
+  border-radius: 2px;
+  background: var(--nikon-black, #141414);
+  color: var(--nikon-yellow, #FFE100);
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  cursor: pointer;
+}
+#nav-toggle:focus-visible { outline: 2px solid var(--nikon-yellow); outline-offset: 2px; }
+body > nav .nav-close {
+  display: none;
+  margin: 0 0 10px;
+  padding: 7px 10px;
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  font-size: 11pt;
+  font-weight: 600;
+  border: 1px solid #555;
+  border-radius: 2px;
+  background: #2a2a2a;
+  color: #f0f0f0;
+  cursor: pointer;
+}
+body > nav .nav-close:hover { background: #333; border-color: var(--nikon-yellow, #FFE100); }
+@media (max-width: 900px) {
+  body { flex-direction: column; height: auto; min-height: 100vh; min-height: 100dvh; }
+  #nav-toggle { display: block; }
+  body > nav .nav-close { display: block; }
+  body > nav {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(320px, 88vw);
+    max-width: 88vw;
+    max-height: none;
+    z-index: 150;
+    box-shadow: 2px 0 8px rgba(0,0,0,.2);
+    transform: translateX(0);
+    transition: transform .2s ease;
+  }
+  body.nav-closed > nav { transform: translateX(-105%); pointer-events: none; }
+  body.nav-closed #nav-toggle { display: block; }
+  main { min-height: calc(100vh - 1px); min-height: calc(100dvh - 1px); padding-top: 48px; }
+  .wh-p.wh-menu-row { flex-wrap: wrap; }
+  .wh-p.wh-menu-row .wh-link { white-space: normal; }
+  .toc-label { white-space: normal; text-overflow: clip; }
+  .toc-toggle, .toc-spacer { width: 28px; }
+  .toc-toggle { font-size: 13pt; line-height: 1; }
+}
+body.wp-embed { background: #fff; }
+body.wp-embed #nav-toggle { display: block; }
+body.wp-embed > nav .nav-close { display: block; }
+@media (max-width: 900px) {
+  body.wp-embed:not(.nav-open) > nav {
+    transform: translateX(-105%);
+    pointer-events: none;
+  }
+}
+@media (min-width: 901px) {
+  body.wp-embed:not(.nav-open) > nav { display: none; }
+  body.wp-embed.nav-open > nav {
+    display: block;
+    position: relative;
+    width: 320px;
+    transform: none;
+    box-shadow: none;
+  }
+  body.wp-embed main { padding-top: 12px; }
+}
+body.wp-embed main { padding-top: 48px; }
+@media (min-width: 901px) {
+  body.wp-embed main { padding-top: 12px; }
+}
+</style>
+</head>
+<body>
+  <button type="button" id="nav-toggle" aria-label="打开目录">目录</button>
+  <nav>
+    <button type="button" id="nav-close" class="nav-close" aria-label="关闭目录">关闭目录</button>
+    <div class="brand-header">
+      <div class="brand-logos">
+        <a class="brand-nikon-link" href="https://www.nikon.com.cn/sc_CN/" target="_blank" rel="noopener noreferrer">
+          <img class="brand-nikon" src="./assets/branding/nikon-logo.png" alt="Nikon"/>
+        </a>
+        <img class="brand-f90x" src="./assets/branding/f90x.svg" alt="F90X"/>
+      </div>
+      <h1 class="bundle">尼康 F90X/F90 操作指南</h1>
+    </div>
+    <select id="bundle" hidden aria-hidden="true"></select>
+    <input id="filter" placeholder="搜索标题与正文…" type="search"/>
+    <ul class="topic-list" id="topics"></ul>
+  </nav>
+  <main>
+    <nav id="breadcrumb" aria-label="当前位置"></nav>
+    <h2 id="title"></h2>
+    <div id="body"></div>
+    <nav id="topic-nav" aria-label="主题导航"></nav>
+  </main>
+  <script src="help-data.js"></script>
+  <script>
+const EXPAND_STORAGE_KEY = 'nikon-help-toc-expanded';
+const state = { bundles: [], locale: 'zh-Hans', current: null, expanded: new Set(), bundleExpanded: {} };
+
+function expandStorageId(bundleId) {
+  return (state.locale || 'zh-Hans') + ':' + bundleId;
+}
+
+function loadExpandedFromStorage(bundle) {
+  try {
+    const all = JSON.parse(localStorage.getItem(EXPAND_STORAGE_KEY) || '{}');
+    const ids = all[expandStorageId(bundle.bundleId)];
+    if (Array.isArray(ids) && ids.length) return new Set(ids);
+  } catch (_) {}
+  return null;
+}
+
+function saveExpandedToStorage(bundleId) {
+  try {
+    const all = JSON.parse(localStorage.getItem(EXPAND_STORAGE_KEY) || '{}');
+    all[expandStorageId(bundleId)] = [...currentExpanded(bundleId)];
+    localStorage.setItem(EXPAND_STORAGE_KEY, JSON.stringify(all));
+  } catch (_) {}
+}
+
+function load() {
+  const data = window.HELP_DATA;
+  if (!data || !data.bundles) {
+    document.getElementById('title').textContent = '帮助数据未加载';
+    document.getElementById('body').textContent = '请重新运行 build_html_viewer.py 生成 help-data.js';
+    return;
+  }
+  state.locale = data.locale || 'zh-Hans';
+  state.bundles = data.bundles;
+  state.bundles.forEach(b => {
+    const saved = loadExpandedFromStorage(b);
+    state.bundleExpanded[b.bundleId] = saved || defaultExpanded(b);
+  });
+  const sel = document.getElementById('bundle');
+  sel.innerHTML = state.bundles.map(b => `<option value="${b.bundleId}">${b.title || b.bundleId}</option>`).join('');
+  sel.onchange = () => { updateBrandHeader(sel.value); renderTopics(sel.value); };
+  document.getElementById('filter').oninput = () => renderTopics(sel.value);
+  let initialBundle = state.bundles[0] && state.bundles[0].bundleId;
+  const hashMatch = location.hash.match(/^#topic\/(.+)$/);
+  if (hashMatch) {
+    const hashId = decodeURIComponent(hashMatch[1]);
+    for (const b of state.bundles) {
+      if (b.topics.some(t => t.id === hashId)) {
+        initialBundle = b.bundleId;
+        expandAncestors(b, hashId);
+        break;
+      }
+    }
+  }
+  if (initialBundle) {
+    sel.value = initialBundle;
+    updateBrandHeader(initialBundle);
+    renderTopics(initialBundle);
+  }
+  window.addEventListener('hashchange', applyHash);
+  applyHash();
+}
+
+function stringsFor(topic) {
+  const s = topic.strings[state.locale] || topic.strings['ja'] || {};
+  if (!s.displayTitle && !s.title) return s;
+  return { ...s, title: s.displayTitle || s.title, displayTitle: s.displayTitle || s.title };
+}
+
+function stripHtml(s) {
+  return (s || '').replace(/<[^>]+>/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/[＜＞]/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function titleHasInlineIcon(s) {
+  return (s || '').includes('<img');
+}
+
+function fixInlineImgs(root) {
+  (root || document).querySelectorAll('img').forEach(img => {
+    let src = img.getAttribute('src') || '';
+    if (src.startsWith('assets/')) src = './' + src;
+    if (/\.(bmp|png)$/i.test(src)) src = src.replace(/\.(bmp|png)$/i, '.webp');
+    img.setAttribute('src', src);
+  });
+}
+
+function topicTitle(t) {
+  const s = stringsFor(t);
+  const raw = s.displayTitle || s.title || t.id;
+  if (titleHasInlineIcon(raw)) return raw;
+  return stripHtml(raw) || t.id.replace(/^.*\./, '');
+}
+
+function setTitleElement(el, rawTitle, fallbackId) {
+  const displayTitle = rawTitle && rawTitle.trim() ? rawTitle : fallbackId.replace(/^.*\./, '');
+  if (titleHasInlineIcon(displayTitle) || displayTitle.includes('<')) {
+    el.innerHTML = displayTitle;
+    fixInlineImgs(el);
+    wireLinks(el);
+  } else {
+    el.textContent = displayTitle;
+  }
+}
+
+function sortTopics(a, b) {
+  return (a.tocIndex || 0) - (b.tocIndex || 0) || a.id.localeCompare(b.id);
+}
+
+function buildTopicIndex(bundle) {
+  const visible = bundle.topics.filter(t => !t.listHidden);
+  const byId = Object.fromEntries(visible.map(t => [t.id, t]));
+  const children = {};
+  const roots = [];
+  visible.forEach(t => {
+    const p = t.tocParent;
+    if (p && byId[p]) {
+      (children[p] = children[p] || []).push(t);
+    } else if ((t.tocLevel || 0) === 0) {
+      roots.push(t);
+    }
+  });
+  Object.values(children).forEach(list => list.sort(sortTopics));
+  roots.sort(sortTopics);
+  if (!roots.length && bundle.tocRoots) {
+    bundle.tocRoots.forEach(id => { if (byId[id]) roots.push(byId[id]); });
+  }
+  return { byId, children, roots };
+}
+
+function defaultExpanded(bundle) {
+  const exp = new Set();
+  const { children } = buildTopicIndex(bundle);
+  bundle.topics.forEach(t => {
+    if (!t.listHidden && (children[t.id] || []).length) exp.add(t.id);
+  });
+  return exp;
+}
+
+function currentExpanded(bundleId) {
+  if (!state.bundleExpanded[bundleId]) state.bundleExpanded[bundleId] = new Set();
+  return state.bundleExpanded[bundleId];
+}
+
+function topicSearchText(t) {
+  if (t.searchText) return t.searchText.toLowerCase();
+  const s = stringsFor(t);
+  const title = stripHtml(topicTitle(t));
+  const body = (s.bodyPlain || stripHtml(s.body || '')).replace(/\s+/g, ' ').trim();
+  return (title + ' ' + body).toLowerCase().trim();
+}
+
+function collectFilterSet(bundle, q) {
+  if (!q) return null;
+  const { byId, children } = buildTopicIndex(bundle);
+  const include = new Set();
+  const exp = currentExpanded(bundle.bundleId);
+  Object.values(byId).forEach(t => {
+    const hay = topicSearchText(t);
+    if (hay.includes(q) || t.id.toLowerCase().includes(q)) {
+      include.add(t.id);
+      let p = t.tocParent;
+      while (p && byId[p]) {
+        include.add(p);
+        exp.add(p);
+        p = byId[p].tocParent;
+      }
+    }
+  });
+  return include;
+}
+
+function subtreeHasMatch(t, children, include) {
+  if (include.has(t.id)) return true;
+  return (children[t.id] || []).some(c => subtreeHasMatch(c, children, include));
+}
+
+function toggleExpand(bundleId, id) {
+  const exp = currentExpanded(bundleId);
+  const b = state.bundles.find(x => x.bundleId === bundleId);
+  if (!b) return;
+  if (exp.has(id)) {
+    exp.delete(id);
+    collapseBranchDom(id);
+  } else {
+    exp.add(id);
+    expandBranchDom(b, id);
+  }
+  saveExpandedToStorage(bundleId);
+}
+
+function tocNodeEl(id) {
+  return document.querySelector('.toc-node[data-id="' + id + '"]');
+}
+
+function tocNodeDepth(li) {
+  const row = li && li.querySelector('.toc-row');
+  if (!row) return 0;
+  const pl = parseInt(row.style.paddingLeft, 10);
+  return isNaN(pl) ? 0 : Math.max(0, Math.round((pl - 4) / 14));
+}
+
+function collapseBranchDom(id) {
+  const li = tocNodeEl(id);
+  if (!li) return;
+  const childUl = li.querySelector(':scope > .toc-children');
+  if (childUl) childUl.remove();
+  const toggle = li.querySelector('.toc-toggle');
+  if (toggle) {
+    toggle.textContent = '\u25B8';
+    toggle.classList.remove('open');
+  }
+}
+
+function expandBranchDom(bundle, id, include) {
+  const { byId, children } = buildTopicIndex(bundle);
+  const t = byId[id];
+  if (!t) return;
+  const li = tocNodeEl(id);
+  if (!li) return;
+  const kids = (children[id] || []).filter(c => !include || subtreeHasMatch(c, children, include));
+  const toggle = li.querySelector('.toc-toggle');
+  if (toggle) {
+    toggle.textContent = '\u25BE';
+    toggle.classList.add('open');
+  }
+  let childUl = li.querySelector(':scope > .toc-children');
+  if (!childUl && kids.length) {
+    childUl = document.createElement('ul');
+    childUl.className = 'toc-children';
+    const depth = tocNodeDepth(li);
+    kids.forEach(child => renderTreeNode(bundle, child, children, depth + 1, include, childUl));
+    li.appendChild(childUl);
+  }
+}
+
+function navScrollEl() {
+  return document.querySelector('body > nav');
+}
+
+function scrollActiveTopicIntoView() {
+  if (!state.current) return;
+  const active = document.querySelector('.toc-node.active > .toc-row');
+  if (active) active.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+
+function updateActiveTopic(id) {
+  document.querySelectorAll('.toc-node').forEach(li => {
+    li.classList.toggle('active', li.dataset.id === id);
+  });
+}
+
+function ensureAncestorsExpanded(bundle, id) {
+  expandAncestors(bundle, id);
+  const { byId } = buildTopicIndex(bundle);
+  const chain = [];
+  let p = byId[id] && byId[id].tocParent;
+  while (p && byId[p]) {
+    chain.unshift(p);
+    p = byId[p].tocParent;
+  }
+  const q = document.getElementById('filter').value.toLowerCase().trim();
+  const include = collectFilterSet(bundle, q);
+  chain.forEach(ancestorId => expandBranchDom(bundle, ancestorId, include));
+}
+
+function expandAncestors(bundle, id) {
+  const { byId } = buildTopicIndex(bundle);
+  const exp = currentExpanded(bundle.bundleId);
+  let p = byId[id] && byId[id].tocParent;
+  while (p && byId[p]) {
+    exp.add(p);
+    p = byId[p].tocParent;
+  }
+}
+
+function renderTreeNode(bundle, t, children, depth, include, ul) {
+  const kids = (children[t.id] || []).filter(c => !include || subtreeHasMatch(c, children, include));
+  const hasKids = kids.length > 0;
+  const li = document.createElement('li');
+  li.className = 'toc-node' + (state.current === t.id ? ' active' : '');
+  li.dataset.id = t.id;
+  const row = document.createElement('div');
+  row.className = 'toc-row';
+  row.style.paddingLeft = (depth * 14 + 4) + 'px';
+  const exp = currentExpanded(bundle.bundleId);
+  if (hasKids) {
+    const toggle = document.createElement('span');
+    toggle.className = 'toc-toggle' + (exp.has(t.id) ? ' open' : '');
+    toggle.textContent = exp.has(t.id) ? '\u25BE' : '\u25B8';
+    toggle.onclick = (e) => { e.stopPropagation(); toggleExpand(bundle.bundleId, t.id); };
+    row.appendChild(toggle);
+  } else {
+    const spacer = document.createElement('span');
+    spacer.className = 'toc-spacer';
+    row.appendChild(spacer);
+  }
+  const label = document.createElement('span');
+  label.className = 'toc-label' + (hasKids ? ' toc-branch' : '');
+  const rawLabel = topicTitle(t);
+  if (titleHasInlineIcon(rawLabel)) {
+    label.innerHTML = rawLabel;
+    fixInlineImgs(label);
+    wireLinks(label);
+  } else {
+    label.textContent = rawLabel;
+  }
+  label.onclick = () => showTopic(t.id);
+  row.appendChild(label);
+  li.appendChild(row);
+  if (hasKids && exp.has(t.id)) {
+    const childUl = document.createElement('ul');
+    childUl.className = 'toc-children';
+    kids.forEach(child => renderTreeNode(bundle, child, children, depth + 1, include, childUl));
+    li.appendChild(childUl);
+  }
+  ul.appendChild(li);
+}
+
+function updateBrandHeader(bundleId) {
+  const logo = document.getElementById('product-logo');
+  if (logo) logo.hidden = bundleId !== 'f90j';
+}
+
+function renderTopics(bundleId, options) {
+  const opts = options || {};
+  const nav = navScrollEl();
+  const prevScroll = nav ? nav.scrollTop : 0;
+  const b = state.bundles.find(x => x.bundleId === bundleId);
+  if (!b) return;
+  const q = document.getElementById('filter').value.toLowerCase().trim();
+  const include = collectFilterSet(b, q);
+  const { roots, children } = buildTopicIndex(b);
+  const ul = document.getElementById('topics');
+  ul.innerHTML = '';
+  roots.forEach(t => {
+    if (include && !subtreeHasMatch(t, children, include)) return;
+    renderTreeNode(b, t, children, 0, include, ul);
+  });
+  if (state.current) updateActiveTopic(state.current);
+  updateBrandHeader(bundleId);
+  if (!nav) return;
+  if (opts.scrollToActive !== false && state.current && document.querySelector('.toc-node.active')) {
+    requestAnimationFrame(() => scrollActiveTopicIntoView());
+  } else {
+    nav.scrollTop = prevScroll;
+  }
+}
+
+function navigateTopic(id) {
+  state.current = id;
+  const hash = 'topic/' + encodeURIComponent(id);
+  if (location.hash !== '#' + hash) {
+    history.replaceState(null, '', '#' + hash);
+  }
+  for (const b of state.bundles) {
+    if (b.topics.some(t => t.id === id)) {
+      ensureAncestorsExpanded(b, id);
+      saveExpandedToStorage(b.bundleId);
+      break;
+    }
+  }
+  updateActiveTopic(id);
+  scrollActiveTopicIntoView();
+}
+
+function resolveJump(href, anchorText) {
+  if (!href || !href.startsWith('#')) return null;
+  if (href.startsWith('#topic/')) {
+    const raw = decodeURIComponent(href.slice(7));
+    for (const b of state.bundles) {
+      if (b.topics.some(t => t.id === raw)) return raw;
+    }
+    if (window.HELP_ANCHOR) {
+      const norm = (anchorText || '').replace(/\s+/g, '').replace(/&emsp;/g, '').trim();
+      if (window.HELP_ANCHOR[norm]) return window.HELP_ANCHOR[norm];
+    }
+    return raw;
+  }
+  const m = href.match(/^#offset-([0-9a-f]+)$/i);
+  if (m && window.HELP_JUMP) {
+    const key = m[1].toLowerCase();
+    const tid = window.HELP_JUMP[key] || window.HELP_JUMP[key.replace(/^0+/, '') || '0'];
+    if (tid) return tid;
+  }
+  if (anchorText && window.HELP_ANCHOR) {
+    const norm = anchorText.replace(/\s+/g, '').replace(/&emsp;/g, '').trim();
+    if (window.HELP_ANCHOR[norm]) return window.HELP_ANCHOR[norm];
+    for (const [label, tid] of Object.entries(window.HELP_ANCHOR)) {
+      if (norm.includes(label) || label.includes(norm)) return tid;
+    }
+  }
+  return null;
+}
+
+function wireLinks(root) {
+  root.querySelectorAll('a').forEach(a => {
+    a.removeAttribute('target');
+    a.addEventListener('click', (e) => {
+      const h = a.getAttribute('href') || '';
+      if (!h.startsWith('#')) return;
+      if (h.startsWith('#topic/') || /^#offset-[0-9a-f]+$/i.test(h)) {
+        e.preventDefault();
+        const tid = resolveJump(h, stripHtml(a.textContent || ''));
+        if (tid) showTopic(tid);
+        return;
+      }
+      if (h.length > 1) {
+        e.preventDefault();
+        const id = decodeURIComponent(h.slice(1));
+        const el = root.querySelector('#' + id) || document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+}
+
+function resolveGhostTopic(id) {
+  if (window.HELP_GHOST && window.HELP_GHOST[id]) return window.HELP_GHOST[id];
+  return id;
+}
+
+function buildFlatTopicList(bundle) {
+  const { roots, children } = buildTopicIndex(bundle);
+  const out = [];
+  function walk(t) {
+    out.push(t);
+    (children[t.id] || []).slice().sort(sortTopics).forEach(walk);
+  }
+  roots.slice().sort(sortTopics).forEach(walk);
+  return out;
+}
+
+function getPrevNextTopics(bundle, id) {
+  const list = buildFlatTopicList(bundle);
+  const idx = list.findIndex(t => t.id === id);
+  return {
+    prev: idx > 0 ? list[idx - 1] : null,
+    next: idx >= 0 && idx < list.length - 1 ? list[idx + 1] : null,
+  };
+}
+
+function buildBreadcrumbTrail(bundle, id) {
+  const { byId } = buildTopicIndex(bundle);
+  const trail = [];
+  let cur = byId[id];
+  while (cur) {
+    trail.unshift(cur);
+    const p = cur.tocParent;
+    cur = p && byId[p] ? byId[p] : null;
+  }
+  return trail;
+}
+
+function makeTopicNavBtn(topic, dir, label) {
+  const a = document.createElement('a');
+  a.className = 'topic-nav-btn topic-nav-' + dir;
+  a.href = '#topic/' + encodeURIComponent(topic.id);
+  const dirEl = document.createElement('span');
+  dirEl.className = 'topic-nav-dir';
+  dirEl.textContent = label;
+  const titleEl = document.createElement('span');
+  titleEl.className = 'topic-nav-label';
+  titleEl.textContent = stripHtml(topicTitle(topic));
+  a.appendChild(dirEl);
+  a.appendChild(titleEl);
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    showTopic(topic.id);
+  });
+  return a;
+}
+
+function renderBreadcrumb(bundle, id) {
+  const el = document.getElementById('breadcrumb');
+  if (!el) return;
+  const trail = buildBreadcrumbTrail(bundle, id);
+  el.innerHTML = '';
+  trail.forEach((t, i) => {
+    if (i > 0) {
+      const sep = document.createElement('span');
+      sep.className = 'crumb-sep';
+      sep.textContent = '›';
+      sep.setAttribute('aria-hidden', 'true');
+      el.appendChild(sep);
+    }
+    if (i === trail.length - 1) {
+      const cur = document.createElement('span');
+      cur.className = 'crumb-current';
+      cur.textContent = stripHtml(topicTitle(t));
+      el.appendChild(cur);
+    } else {
+      const a = document.createElement('a');
+      a.className = 'crumb-link';
+      a.href = '#topic/' + encodeURIComponent(t.id);
+      a.textContent = stripHtml(topicTitle(t));
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        showTopic(t.id);
+      });
+      el.appendChild(a);
+    }
+  });
+}
+
+function renderTopicNav(bundle, id) {
+  const nav = document.getElementById('topic-nav');
+  if (!nav) return;
+  const { prev, next } = getPrevNextTopics(bundle, id);
+  nav.innerHTML = '';
+  if (prev) nav.appendChild(makeTopicNavBtn(prev, 'prev', '上一页'));
+  else {
+    const spacer = document.createElement('span');
+    spacer.className = 'topic-nav-spacer';
+    nav.appendChild(spacer);
+  }
+  if (next) nav.appendChild(makeTopicNavBtn(next, 'next', '下一页'));
+  else {
+    const spacer = document.createElement('span');
+    spacer.className = 'topic-nav-spacer';
+    nav.appendChild(spacer);
+  }
+}
+
+function updateTopicChrome(bundle, id) {
+  renderBreadcrumb(bundle, id);
+  renderTopicNav(bundle, id);
+}
+
+function showTopic(id) {
+  id = resolveGhostTopic(id);
+  for (const b of state.bundles) {
+    const t = b.topics.find(x => x.id === id);
+    if (!t) continue;
+    const sel = document.getElementById('bundle');
+    if (sel.value !== b.bundleId) {
+      sel.value = b.bundleId;
+      renderTopics(b.bundleId, { scrollToActive: true });
+    }
+    navigateTopic(id);
+    const s = stringsFor(t);
+    const rawTitle = s.displayTitle || s.title || id;
+    const titleEl = document.getElementById('title');
+    setTitleElement(titleEl, rawTitle, id);
+    const body = document.getElementById('body');
+    const text = s.body || '';
+    if ((s.bodyFormat || 'plain') === 'html' && text.includes('<')) {
+      body.innerHTML = text;
+      fixInlineImgs(body);
+    } else {
+      body.textContent = text;
+    }
+    wireLinks(body);
+    updateTopicChrome(b, id);
+    const main = document.querySelector('main');
+    if (main) main.scrollTop = 0;
+    return;
+  }
+}
+
+function applyHash() {
+  const m = location.hash.match(/^#topic\/(.+)$/);
+  if (m) showTopic(decodeURIComponent(m[1]));
+}
+
+load();
+</script>
+  <script>
+(function () {
+  const params = new URLSearchParams(location.search);
+  const inIframe = window.self !== window.top;
+  const embed = params.has('embed') || document.body.classList.contains('wp-embed');
+  if (embed || inIframe) document.body.classList.add('wp-embed');
+  const narrow = window.matchMedia('(max-width: 900px)').matches;
+  if (embed || narrow) document.body.classList.add('nav-closed');
+  const toggle = document.getElementById('nav-toggle');
+  const closeBtn = document.getElementById('nav-close');
+  function openNav() {
+    document.body.classList.remove('nav-closed');
+    document.body.classList.add('nav-open');
+  }
+  function closeNav() {
+    document.body.classList.add('nav-closed');
+    document.body.classList.remove('nav-open');
+  }
+  if (toggle) toggle.addEventListener('click', openNav);
+  if (closeBtn) closeBtn.addEventListener('click', closeNav);
+  document.getElementById('topics')?.addEventListener('click', (e) => {
+    if (!narrow && !embed) return;
+    const label = e.target.closest('.toc-label');
+    if (label) closeNav();
+  });
+  if (embed || inIframe) {
+    function postHeight() {
+      const h = Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight,
+        document.documentElement.offsetHeight
+      );
+      try {
+        parent.postMessage({ type: 'nikon-help-height', height: h }, '*');
+      } catch (_) {}
+    }
+    if (typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(postHeight).observe(document.body);
+    }
+    window.addEventListener('hashchange', postHeight);
+    window.addEventListener('load', postHeight);
+    setTimeout(postHeight, 120);
+    setTimeout(postHeight, 600);
+  }
+})();
+</script>
+</body>
+</html>
